@@ -1,6 +1,7 @@
 import React, {Component, useState} from 'react';
 import './App.css';
 import Person from './Person/Person';
+import classes from './App.css'
 
 class App extends Component {
     state = {
@@ -41,13 +42,7 @@ class App extends Component {
     }
 
     render() {
-        const style = {
-            backgroundColor: 'white',
-            font: 'inherit',
-            border: '1px solid blue',
-            padding: '8px',
-            cursor: 'pointer'
-        };
+        let btnClass = '';
         let persons = null;
         if (this.state.showPersons) {
             persons = (
@@ -61,18 +56,28 @@ class App extends Component {
                             changed={(event) => this.nameChangedHandler(event, person.id)}/>
                     })}
                 </div>
-            )
+            );
+            btnClass = classes.Red;
         }
+        let classes = [];
+        if (this.state.persons.length <= 2) {
+            classes.push('red');
+        }
+        if (this.state.persons.length <= 1) {
+            classes.push('bold');
+        }
+
         return (
-            <div className="App">
+
+            <div className={classes.App}>
                 <h1>Hello</h1>
-                <p>this is working</p>
-                <button
-                    style={style}
-                    onClick={this.togglePersonsHandler}>Toggle names
+                <p className={assignedClasses.join(' ')}>this is working</p>
+                <button className={btnClass.join(' ')} onClick={this.togglePersonsHandler}>
+                    Toggle persons
                 </button>
                 {persons}
             </div>
+
         );
     }
 
